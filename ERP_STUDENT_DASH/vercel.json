@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
+  "buildCommand": "cd ERP_STUDENT_DASH && npm run build",
+  "devCommand": "cd ERP_STUDENT_DASH && npm run dev",
+  "installCommand": "cd ERP_STUDENT_DASH && npm install",
   "framework": "nextjs",
-  "outputDirectory": ".next",
+  "outputDirectory": "ERP_STUDENT_DASH/.next",
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://your-backend-api-url.com"
+    "NEXT_PUBLIC_API_URL": "@next-public-api-url"
   }
 }
