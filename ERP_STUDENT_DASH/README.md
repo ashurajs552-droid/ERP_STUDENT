@@ -1,6 +1,16 @@
 # Student ERP Dashboard
 
-A modern, feature-rich Student ERP (Enterprise Resource Planning) Dashboard built with React, TypeScript, and Tailwind CSS. This application provides students with a comprehensive platform to manage their academic information, track attendance, view grades, manage fees, and access course materials.
+A modern, feature-rich Student ERP (Enterprise Resource Planning) Dashboard built with **Next.js 14**, **React 18**, **TypeScript**, and **Tailwind CSS**. This application provides students with a comprehensive platform to manage their academic information, track attendance, view grades, manage fees, and access course materials.
+
+## ⚡ Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Charts**: Recharts
+- **HTTP Client**: Axios
+- **Deployment**: Vercel-ready
 
 ## 🚀 Features
 
@@ -136,57 +146,81 @@ A modern, feature-rich Student ERP (Enterprise Resource Planning) Dashboard buil
 
 ```
 ERP_STUDENT_DASH/
-├── public/                      # Static assets
+├── public/                          # Static assets
 ├── src/
-│   ├── components/             # Reusable components
+│   ├── app/                        # Next.js App Router
+│   │   ├── (dashboard)/           # Route group for protected routes
+│   │   │   ├── dashboard/
+│   │   │   │   └── page.tsx      # Dashboard page
+│   │   │   ├── grades/
+│   │   │   │   └── page.tsx      # Grades page
+│   │   │   ├── attendance/
+│   │   │   │   └── page.tsx      # Attendance page
+│   │   │   ├── fees/
+│   │   │   │   └── page.tsx      # Fees page
+│   │   │   ├── courses/
+│   │   │   │   └── page.tsx      # Courses page
+│   │   │   ├── schedule/
+│   │   │   │   └── page.tsx      # Schedule page
+│   │   │   ├── profile/
+│   │   │   │   └── page.tsx      # Profile page
+│   │   │   └── layout.tsx         # Protected layout with auth
+│   │   ├── login/
+│   │   │   └── page.tsx           # Login page
+│   │   ├── layout.tsx             # Root layout
+│   │   ├── page.tsx               # Home page (redirects)
+│   │   └── globals.css            # Global styles with Tailwind
+│   │
+│   ├── components/                 # Reusable components
 │   │   ├── auth/
-│   │   │   └── ProtectedRoute.tsx    # Route protection
+│   │   │   └── ProtectedRoute.tsx # Route protection (legacy)
 │   │   └── layout/
-│   │       ├── DashboardLayout.tsx   # Main layout wrapper
-│   │       ├── Header.tsx            # Top navigation bar
-│   │       └── Sidebar.tsx           # Side navigation menu
+│   │       ├── DashboardLayout.tsx # Main layout wrapper
+│   │       ├── Header.tsx          # Top navigation bar
+│   │       └── Sidebar.tsx         # Side navigation menu
 │   │
-│   ├── context/               # React Context
-│   │   └── AuthContext.tsx   # Authentication state management
+│   ├── context/                   # React Context
+│   │   └── AuthContext.tsx       # Authentication state management
 │   │
-│   ├── pages/                 # Page components
-│   │   ├── Dashboard.tsx     # Main dashboard
-│   │   ├── GradesPage.tsx    # Grades management
-│   │   ├── AttendancePage.tsx # Attendance tracking
-│   │   ├── FeesPage.tsx      # Fee management
-│   │   ├── CoursesPage.tsx   # Courses overview
-│   │   ├── SchedulePage.tsx  # Class schedule
-│   │   ├── ProfilePage.tsx   # User profile
-│   │   └── LoginPage.tsx     # Authentication
+│   ├── pages/                     # Page component logic
+│   │   ├── Dashboard.tsx         # Dashboard business logic
+│   │   ├── GradesPage.tsx        # Grades logic
+│   │   ├── AttendancePage.tsx    # Attendance logic
+│   │   ├── FeesPage.tsx          # Fees logic
+│   │   ├── CoursesPage.tsx       # Courses logic
+│   │   ├── SchedulePage.tsx      # Schedule logic
+│   │   └── ProfilePage.tsx       # Profile logic
 │   │
-│   ├── types/                 # TypeScript definitions
-│   │   └── index.ts          # Type interfaces
+│   ├── types/                     # TypeScript definitions
+│   │   └── index.ts              # Type interfaces
 │   │
-│   ├── utils/                 # Utility functions
-│   │   └── cn.ts             # Class name utility
-│   │
-│   ├── App.tsx               # Main application component
-│   ├── main.tsx              # Application entry point
-│   └── index.css             # Global styles with Tailwind
+│   └── utils/                     # Utility functions
+│       └── cn.ts                 # Class name utility
 │
-├── index.html                # HTML template
-├── package.json              # Dependencies
-├── tsconfig.json             # TypeScript configuration
-├── tailwind.config.js        # Tailwind CSS configuration
-├── vite.config.ts            # Vite build configuration
-└── README.md                 # Project documentation
+├── .env.local.example            # Example environment variables
+├── .eslintrc.json                # ESLint configuration
+├── .gitignore                    # Git ignore rules
+├── DEPLOYMENT.md                 # Deployment guide
+├── next.config.js                # Next.js configuration
+├── package.json                  # Dependencies
+├── postcss.config.js             # PostCSS configuration
+├── tailwind.config.js            # Tailwind CSS configuration
+├── tsconfig.json                 # TypeScript configuration
+├── vercel.json                   # Vercel deployment config
+└── README.md                     # Project documentation
 ```
 
 ## 🛠️ Technology Stack
 
 ### Frontend Framework
-- **React 18.2**: Modern UI library with hooks
+- **Next.js 14**: React framework with App Router
+- **React 18**: Modern UI library with hooks
 - **TypeScript**: Type-safe development
-- **Vite**: Fast build tool and dev server
 
 ### Routing & State
-- **React Router DOM**: Client-side routing
-- **Context API**: Global state management
+- **Next.js App Router**: File-based routing with layouts
+- **Next.js Navigation**: useRouter, usePathname hooks
+- **Context API**: Global state management (client-side)
 
 ### UI & Styling
 - **Tailwind CSS**: Utility-first CSS framework
@@ -202,8 +236,9 @@ ERP_STUDENT_DASH/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v16 or higher)
+- Node.js (v18 or higher)
 - npm or yarn package manager
+- Backend API running (see backend setup)
 
 ### Installation
 
@@ -217,12 +252,21 @@ ERP_STUDENT_DASH/
    npm install
    ```
 
-3. **Start development server**
+3. **Configure environment variables**
+   ```bash
+   cp .env.local.example .env.local
+   ```
+   Edit `.env.local` and set your backend API URL:
+   ```
+   NEXT_PUBLIC_API_URL=http://localhost:5000
+   ```
+
+4. **Start development server**
    ```bash
    npm run dev
    ```
 
-4. **Open in browser**
+5. **Open in browser**
    ```
    http://localhost:3000
    ```
@@ -235,25 +279,74 @@ Password: password123
 
 ## 📦 Available Scripts
 
-- `npm run dev` - Start development server
+- `npm run dev` - Start Next.js development server
 - `npm run build` - Build for production
-- `npm run preview` - Preview production build
+- `npm run start` - Start production server
 - `npm run lint` - Run ESLint
+
+## 🚀 Deployment
+
+### Deploy to Vercel (Recommended)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ashurajs552-droid/ERP_STUDENT)
+
+**Quick Deploy:**
+1. Click the "Deploy with Vercel" button above
+2. Set environment variable: `NEXT_PUBLIC_API_URL`
+3. Deploy!
+
+**Manual Deploy:**
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Login to Vercel
+vercel login
+
+# Deploy
+vercel
+
+# Deploy to production
+vercel --prod
+```
+
+**Detailed deployment guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md)
+
+### Environment Variables for Production
+
+When deploying to Vercel, set these environment variables in your project settings:
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `NEXT_PUBLIC_API_URL` | Backend API URL | `https://your-api.herokuapp.com` |
+
+**Important**: The `NEXT_PUBLIC_` prefix makes the variable accessible in the browser.
 
 ## 🔌 Backend Integration
 
-The dashboard is designed to work with the Student ERP Backend API. Configure the backend URL in the Vite proxy settings:
+The dashboard is designed to work with the Student ERP Backend API. Configure the backend URL using environment variables:
 
-```typescript
-// vite.config.ts
-server: {
-  port: 3000,
-  proxy: {
-    '/api': {
-      target: 'http://localhost:5000', // Your backend URL
-      changeOrigin: true,
+**Development** (`.env.local`):
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+**Production** (Vercel Environment Variables):
+```env
+NEXT_PUBLIC_API_URL=https://your-backend-api.herokuapp.com
+```
+
+**API Proxy Configuration** (`next.config.js`):
+```javascript
+async rewrites() {
+  return [
+    {
+      source: '/api/:path*',
+      destination: process.env.NEXT_PUBLIC_API_URL 
+        ? `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`
+        : 'http://localhost:5000/api/:path*',
     },
-  },
+  ];
 }
 ```
 
